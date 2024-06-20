@@ -4,11 +4,11 @@
     "slug": "hawaiPizza",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/HawaiLogo.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/splash.png",
+      "image": "./assets/images/HawaiLogo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
