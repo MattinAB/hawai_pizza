@@ -4,11 +4,13 @@ import { View, StyleSheet } from "react-native";
 import Button from "@/src/components/Button";
 import * as yup from "yup"; // for everything
 import FormField from "@/src/components/formik/FormFeild";
+import ImagePickerField from "@/src/components/formik/ImagePickerField";
 
 export default function Create() {
   const validationSchema = yup.object().shape({
     name: yup.string().required().label("Name"),
     price: yup.number().required().label("Price"),
+    image: yup.string().required().label("Image"), // This is the line that needs to be changed
   });
 
   return (
@@ -17,6 +19,7 @@ export default function Create() {
         initialValues={{
           name: "",
           price: "",
+          image: null, // This is the line that needs to be changed
         }}
         onSubmit={(values, { resetForm }) => {
           console.log(values);
@@ -24,11 +27,11 @@ export default function Create() {
         }}
         validationSchema={validationSchema}
       >
-        {({ values, handleSubmit, resetForm }) => (
+        {({ handleSubmit }) => (
           <>
+            <ImagePickerField name="image" />
             <FormField name="name" />
             <FormField name="price" keyboardType={"numeric"} />
-
             <Button onPress={handleSubmit} title="Submit" />
           </>
         )}
