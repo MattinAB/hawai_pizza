@@ -12,7 +12,7 @@ export default function MenuList() {
         options={{
           title: "menu",
           headerRight: () => (
-            <Link href="/Cart" asChild>
+            <Link href="/create" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
@@ -25,6 +25,7 @@ export default function MenuList() {
               </Pressable>
             </Link>
           ),
+          presentation: "modal", // Add this line
         }}
       />
       <Stack.Screen
