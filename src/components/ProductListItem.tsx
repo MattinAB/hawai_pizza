@@ -4,7 +4,7 @@ import { Text } from "./Themed";
 import { Product } from "../../assets/types";
 import Colors from "../constants/Colors";
 import { MonoText } from "./StyledText";
-import { Link } from "expo-router";
+import { Link, useSegments } from "expo-router";
 
 type Props = {
   product: Product;
@@ -12,8 +12,10 @@ type Props = {
 };
 
 export default function ProductListItem({ product, onPress }: Props) {
+  const segment = useSegments();
+
   return (
-    <Link href={`/menu/${product.id}`} asChild>
+    <Link href={`/${segment[0]}/menu/${product.id}`} asChild>
       <Pressable style={styles.container} onPress={onPress}>
         <Image
           style={styles.image}

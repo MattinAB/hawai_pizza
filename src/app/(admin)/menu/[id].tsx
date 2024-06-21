@@ -5,9 +5,16 @@ import { View, Text } from "@/src/components/Themed";
 import { useLocalSearchParams } from "expo-router";
 import products from "@/assets/data/products";
 import Colors from "@/src/constants/Colors";
+import { useCart } from "../../provider/CartContext";
+import { PizzaSize } from "@/assets/types";
+import { useRouter } from "expo-router";
 
 export default function ProductDetailsScreen() {
-  const [selectedSize, setSelectedSize] = useState();
+  const [selectedSize, setSelectedSize] = useState("M");
+  const route = useRouter();
+
+  const { AddItem } = useCart();
+
   const { id } = useLocalSearchParams();
   const product = products.find((product) => product.id.toString() === id);
   const sizes = ["S", "M", "L", "XL"];
@@ -16,7 +23,9 @@ export default function ProductDetailsScreen() {
     <Text>Product not found!</Text>;
   }
   const AddToCart = () => {
-    alert("Added to Cart");
+    if (!product) return null;
+    AddItem(product, selectedSize as PizzaSize);
+    route.push("/Cart");
   };
   return (
     <View style={styles.container}>
@@ -27,7 +36,7 @@ export default function ProductDetailsScreen() {
       <View style={styles.sizes}>
         {sizes.map((size) => (
           <Pressable
-            onPress={() => setSelectedSize(size)}
+            onPress={() => setSelectedSize(size as PizzaSize)}
             style={[
               styles.sizeContainer,
               {
@@ -40,7 +49,7 @@ export default function ProductDetailsScreen() {
             <Text
               style={[
                 styles.textSize,
-                { color: selectedSize === size ? "gray" : "black" },
+                { color: selectedSize === size ? "black" : "gray" },
               ]}
             >
               {size}

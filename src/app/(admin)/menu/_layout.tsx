@@ -12,7 +12,7 @@ export default function MenuList() {
         options={{
           title: "menu",
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <Link href="/Cart" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
