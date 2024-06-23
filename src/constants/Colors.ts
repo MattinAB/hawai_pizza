@@ -2,6 +2,7 @@ const tintColorLight = '#2f95dc';
 const tintColorDark = '#fff';
 
 export default {
+  danger: "#ff5454",
   light: {
     text: '#000',
     background: '#fff',
