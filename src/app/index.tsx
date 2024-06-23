@@ -1,5 +1,5 @@
-import { View, StyleSheet, Pressable } from "react-native";
 import React from "react";
+import { View, StyleSheet } from "react-native";
 
 import { Link } from "expo-router";
 import Colors from "../constants/Colors";
@@ -11,7 +11,7 @@ const index = () => {
       <Link href={"/(user)"} asChild>
         <Button title="User" />
       </Link>
-      <Link href={"/(admin)"} asChild>
+      <Link href={"/LoginScreen/"} asChild>
         <Button title="Admin" />
       </Link>
     </View>

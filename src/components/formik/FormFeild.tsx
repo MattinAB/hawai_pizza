@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     backgroundColor: "#f9f9f9",
-    borderRadius: 25,
+    borderRadius: 10,
     marginVertical: 10,
   },
 });

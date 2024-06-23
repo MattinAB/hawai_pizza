@@ -12,7 +12,7 @@ export default function MenuList() {
         options={{
           title: "menu",
           headerRight: () => (
-            <Link href="/create" asChild>
+            <Link href="/(admin)/create" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome
@@ -26,26 +26,6 @@ export default function MenuList() {
             </Link>
           ),
           presentation: "modal", // Add this line
-        }}
-      />
-      <Stack.Screen
-        name="[id]"
-        options={{
-          title: "Details",
-          headerRight: () => (
-            <Link href="/menu" asChild>
-              <Pressable>
-                {({ pressed }) => (
-                  <FontAwesome
-                    name="pencil"
-                    size={25}
-                    color="gray"
-                    style={{ marginRight: 15, opacity: pressed ? 0.5 : 1 }}
-                  />
-                )}
-              </Pressable>
-            </Link>
-          ),
         }}
       />
     </Stack>

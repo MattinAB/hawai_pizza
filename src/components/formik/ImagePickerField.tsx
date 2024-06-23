@@ -33,6 +33,7 @@ export default function ImagePickerField({ name }: Props) {
     try {
       const result = await imagePicker.launchImageLibraryAsync({
         mediaTypes: imagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
         aspect: [4, 3], // 4:3
         quality: 1,
       });

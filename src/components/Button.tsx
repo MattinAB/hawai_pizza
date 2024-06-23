@@ -23,7 +23,7 @@ export default function ButtonComponent({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Colors.light.tint,
-    borderRadius: 25,
+    borderRadius: 15,
     justifyContent: "center",
     padding: 10,
     marginVertical: 10,

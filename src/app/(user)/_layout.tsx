@@ -51,14 +51,24 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen name="index" options={{ href: null }} />
       <Tabs.Screen
-        name="two"
+        name="orders"
         options={{
           title: "orders",
+          headerShown: false,
           tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
         }}
       />
-      <Tabs.Screen name="index" options={{ href: null }} />
+      <Tabs.Screen
+        name="two"
+        options={{
+          title: "profile",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="address-card" color={color} />
+          ),
+        }}
+      />
     </Tabs>
   );
 }
