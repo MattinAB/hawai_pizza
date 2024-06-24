@@ -6,6 +6,7 @@ import { Pressable } from "react-native";
 import Colors from "@/src/constants/Colors";
 import { useColorScheme } from "@/src/components/useColorScheme";
 import { useClientOnlyValue } from "@/src/components/useClientOnlyValue";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -40,14 +41,35 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="orders"
         options={{
           title: "orders",
-          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+          headerShown: false,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="list-status"
+              color={color}
+              size={size}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "profile",
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="account-tie-outline"
+              color={color}
+              size={size}
+            />
+          ),
         }}
       />
       <Tabs.Screen name="index" options={{ href: null }} />
       <Tabs.Screen name="create" options={{ href: null }} />
+      <Tabs.Screen name="auth" options={{ href: null }} />
     </Tabs>
   );
 }

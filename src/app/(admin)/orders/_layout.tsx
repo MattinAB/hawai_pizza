@@ -3,7 +3,7 @@ export default function orders() {
   return (
     <Stack>
       <Stack.Screen
-        name="index"
+        name="list"
         options={{
           headerShown: false,
           title: "orders",

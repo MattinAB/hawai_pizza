@@ -1,5 +1,4 @@
-import { StyleSheet, FlatList } from "react-native";
-
+import { StyleSheet, FlatList, Platform } from "react-native";
 import { Text, View } from "@/src/components/Themed";
 import orders from "@/assets/data/orders";
 import OrderCard from "@/src/components/orderCard";
@@ -20,6 +19,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
+    paddingTop: Platform.OS === "ios" ? 50 : 0,
   },
   title: {
     fontSize: 20,

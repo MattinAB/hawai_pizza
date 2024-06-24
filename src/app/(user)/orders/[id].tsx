@@ -4,6 +4,7 @@ import React from "react";
 import { View, Text, StyleSheet, FlatList } from "react-native";
 import OrderDetailsCard from "@/src/components/OrderDetailsCard";
 import Orders from "@/assets/data/orders";
+import OrderListItem from "@/src/components/OrderListItem";
 
 export default function OrderDetails() {
   const { id } = useLocalSearchParams();
@@ -18,6 +19,7 @@ export default function OrderDetails() {
         data={order?.order_items}
         renderItem={({ item }) => <OrderDetailsCard item={item} />}
         contentContainerStyle={{ padding: 10, gap: 10 }}
+        ListHeaderComponent={() => <OrderListItem order={order} />}
       />
     </View>
   );
@@ -25,6 +27,7 @@ export default function OrderDetails() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+
     backgroundColor: Colors.light.background,
   },
 });

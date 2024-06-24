@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, Pressable } from "react-native";
-import Button from "../components/Button";
+import Button from "@/src/components/Button";
 import { Formik } from "formik";
-import FormField from "../components/formik/FormFeild";
+import FormField from "@/src/components/formik/FormFeild";
 import * as Yup from "yup";
 import { Link } from "expo-router";
 
@@ -17,7 +17,7 @@ export default function RegisterScreen() {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={require("../../assets/images/HawaiPizzaLogo.jpg")}
+        source={require("@/assets/images/HawaiPizzaLogo.jpg")}
       />
       <Formik
         initialValues={{ username: "", password: "", name: "" }}

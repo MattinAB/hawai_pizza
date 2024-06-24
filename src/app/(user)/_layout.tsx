@@ -58,7 +58,13 @@ export default function TabLayout() {
         options={{
           title: "orders",
           headerShown: false,
-          tabBarIcon: ({ color }) => <TabBarIcon name="list" color={color} />,
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="list-status"
+              color={color}
+              size={size}
+            />
+          ),
         }}
       />
       <Tabs.Screen
@@ -74,6 +80,7 @@ export default function TabLayout() {
           ),
         }}
       />
+      <Tabs.Screen name="auth" options={{ href: null }} />
     </Tabs>
   );
 }

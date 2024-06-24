@@ -11,7 +11,7 @@ const index = () => {
       <Link href={"/(user)"} asChild>
         <Button title="User" />
       </Link>
-      <Link href={"/LoginScreen/"} asChild>
+      <Link href={"/(admin)/"} asChild>
         <Button title="Admin" />
       </Link>
     </View>
