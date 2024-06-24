@@ -69,7 +69,7 @@ export default function TabLayout() {
       />
       <Tabs.Screen name="index" options={{ href: null }} />
       <Tabs.Screen name="create" options={{ href: null }} />
-      <Tabs.Screen name="auth" options={{ href: null }} />
+      <Tabs.Screen name="auth" options={{ href: null, headerShown: false }} />
     </Tabs>
   );
 }
