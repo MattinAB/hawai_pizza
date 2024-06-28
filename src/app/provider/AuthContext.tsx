@@ -1,10 +1,4 @@
-import {
-  PropsWithChildren,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { PropsWithChildren, createContext, useContext, useState } from "react";
 import { supabase } from "@/src/app/lib/Subabase";
 import { Session } from "@supabase/supabase-js";
 
@@ -31,7 +25,7 @@ export default function AuthProvider({ children }: PropsWithChildren) {
   const [loading, setLoading] = useState(true);
   const [profile, setProfile] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
-  console.log("profile", profile);
+  // console.log("profile", profile);
 
   const fetchSession = async () => {
     const {

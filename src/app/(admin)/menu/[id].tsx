@@ -1,23 +1,25 @@
 import React, { useState } from "react";
-import { Button, Image, Pressable, StyleSheet } from "react-native";
+import { ActivityIndicator, Button, Image, Pressable, StyleSheet } from "react-native";
 import { Link, Stack } from "expo-router";
 import { View, Text } from "@/src/components/Themed";
 import { useLocalSearchParams } from "expo-router";
 import products from "@/assets/data/products";
 import Colors from "@/src/constants/Colors";
 
-import { useRouter } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
+import { useProductId } from "@/src/api/product";
 
 export default function ProductDetailsScreen() {
-  const route = useRouter();
+  const { id:idString } = useLocalSearchParams();
+  const id = parseFloat( typeof idString === 'string' ? idString : idString?.[0] ?? "" );  
 
-  const { id } = useLocalSearchParams();
-  const product = products.find((product) => product.id.toString() === id);
+const { data:product, error, isLoading } = useProductId( id);
 
-  if (!product) {
-    <Text>Product not found!</Text>;
-  }
+
+if (isLoading) return <ActivityIndicator />;
+
+if (error || !product) return <Text>Failed to fetch product</Text>;
+
 
   return (
     <View style={styles.container}>
@@ -40,7 +42,7 @@ export default function ProductDetailsScreen() {
           ),
         }}
       />
-      <Image style={styles.image} source={{ uri: product?.image }} />
+      <Image style={styles.image} source={{ uri: product?.image ?? undefined}} />
       <Text style={styles.title}>{product?.name}</Text>
       <Text style={styles.price}>${product?.price}</Text>
     </View>

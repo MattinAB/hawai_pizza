@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
   image: {
     width: "100%",
     aspectRatio: 1, // 1:1 aspect ratio
+    borderRadius: 5,
   },
   prise: {
     fontWeight: "bold",

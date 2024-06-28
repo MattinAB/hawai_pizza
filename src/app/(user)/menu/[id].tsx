@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-import { Button, Image, Pressable, StyleSheet } from "react-native";
+import { ActivityIndicator, Button, Image, Pressable, StyleSheet } from "react-native";
 import { Stack } from "expo-router";
 import { View, Text } from "@/src/components/Themed";
 import { useLocalSearchParams } from "expo-router";
-import products from "@/assets/data/products";
 import Colors from "@/src/constants/Colors";
 import { useCart } from "@/src/app/provider/CartContext";
 import { PizzaSize } from "@/assets/types";
 import { useRouter } from "expo-router";
+import { useProductId } from "@/src/api/product";
 
 export default function ProductDetailsScreen() {
   const [selectedSize, setSelectedSize] = useState("M");
@@ -16,12 +16,18 @@ export default function ProductDetailsScreen() {
   const { AddItem } = useCart();
 
   const { id } = useLocalSearchParams();
-  const product = products.find((product) => product.id.toString() === id);
+  
+  const { data:product, error, isLoading } = useProductId(parseInt( typeof id === 'string' ? id : id[0]));
+
+
+  if (isLoading) return <ActivityIndicator />;
+  
+  if (error || !product) return <Text>Failed to fetch product</Text>;  
+  
+  
   const sizes = ["S", "M", "L", "XL"];
 
-  if (!product) {
-    <Text>Product not found!</Text>;
-  }
+
   const AddToCart = () => {
     if (!product) return null;
     AddItem(product, selectedSize as PizzaSize);
@@ -30,7 +36,7 @@ export default function ProductDetailsScreen() {
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ title: "Details" }} />
-      <Image style={styles.image} source={{ uri: product?.image }} />
+      <Image style={styles.image} source={{ uri: product?.image || undefined}} />
       <Text style={styles.price}>${product?.price}</Text>
       <Text>Select Size</Text>
       <View style={styles.sizes}>

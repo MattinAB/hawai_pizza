@@ -5,17 +5,23 @@ import Button from "@/src/components/Button";
 import * as yup from "yup"; // for everything
 import FormField from "@/src/components/formik/FormFeild";
 import ImagePickerField from "@/src/components/formik/ImagePickerField";
-import { Stack, useLocalSearchParams } from "expo-router";
+import { Stack, useLocalSearchParams, useRouter } from "expo-router";
+import { useInsertProduct, useUpdateProduct } from "@/src/api/product";
 
 export default function Create() {
   const validationSchema = yup.object().shape({
     name: yup.string().required().label("Name"),
     price: yup.number().required().label("Price"),
-    image: yup.string().required().label("Image"), // This is the line that needs to be changed
+    image: yup.string().label("Image"), // This is the line that needs to be changed
   });
+  const router = useRouter();
+  const { mutate: inserProduct } = useInsertProduct();
+  const { mutate: updateProduct } = useUpdateProduct();
 
-  const { id } = useLocalSearchParams();
-  const isUpdated = !!id; // This is the line that needs to be changed
+  const { id: isString } = useLocalSearchParams();
+  const id = parseFloat( typeof isString === "string" ? isString : isString?.[0] || "");
+  
+  const isUpdated = !!isString as boolean; // This is the line that has been changed
   const handleDelete = () => {
     console.log("Delete");
   };
@@ -25,6 +31,7 @@ export default function Create() {
       { text: "Yes", onPress: () => handleDelete(), style: "destructive" },
     ]);
   };
+
   return (
     <View style={styles.container}>
       <Stack.Screen
@@ -39,11 +46,22 @@ export default function Create() {
           image: null, // This is the line that needs to be changed
         }}
         onSubmit={(values, { resetForm }) => {
-          if (isUpdated) {
-            return;
+          if (!isUpdated) {
+            inserProduct({
+              name: values.name,
+              price: parseFloat(values.price),
+              image: values.image,
+            });
+          } else {
+            updateProduct({
+              id,
+              name: values.name,
+              price: parseFloat(values.price),
+              image: values.image,
+            });
           }
-          console.log(values);
           resetForm();
+          router.back();
         }}
         validationSchema={validationSchema}
       >
