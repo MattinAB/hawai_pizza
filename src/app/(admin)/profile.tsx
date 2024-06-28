@@ -5,9 +5,13 @@ import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import * as imagePicker from "expo-image-picker";
 import Colors from "@/src/constants/Colors";
+import { useAuth } from "@/src/app/provider/AuthContext";
+import { supabase } from "@/src/app/lib/Subabase";
+import { Redirect } from "expo-router";
 
 export default function TabTwoScreen() {
   const [imageUri, setImageUri] = React.useState("");
+  const { sessions, setProfile } = useAuth();
 
   const ImageRequest = async () => {
     try {
@@ -23,6 +27,12 @@ export default function TabTwoScreen() {
     } catch (error) {
       console.log("Error reading an image", error);
     }
+  };
+   if (!sessions) return <Redirect href={"/(user)"} />;
+  const onLogout = () => {
+    supabase.auth.signOut();
+    setProfile(null);
+    return <Redirect href={"/(user)"} />;
   };
 
   return (
@@ -42,13 +52,15 @@ export default function TabTwoScreen() {
         )}
       </Pressable>
       <Text style={styles.title}>mattin.a@outlook.com</Text>
-      <Pressable style={styles.signOut}>
-        <FontAwesome
-          name="sign-out"
-          size={40}
-          color={Colors.light.tabIconSelected}
-        />
-      </Pressable>
+      {sessions && (
+        <Pressable style={styles.signOut} onPress={onLogout}>
+          <FontAwesome
+            name="sign-out"
+            size={40}
+            color={Colors.light.tabIconSelected}
+          />
+        </Pressable>
+      )}
     </View>
   );
 }

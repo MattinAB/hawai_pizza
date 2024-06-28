@@ -1,17 +1,47 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, Pressable } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  GestureResponderEvent,
+} from "react-native";
 import Button from "@/src/components/Button";
+
 import { Formik } from "formik";
 import FormField from "@/src/components/formik/FormFeild";
 import * as Yup from "yup";
 import { Link } from "expo-router";
+import { supabase } from "@/src/app/lib/Subabase";
+import Submit from "@/src/components/formik/Submit";
+import { useAuth } from "../provider/AuthContext";
 
 export default function RegisterScreen() {
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const { fetchSession } = useAuth(); // This is the function to fetch the session
+
   const validationShema = Yup.object().shape({
     username: Yup.string().required().min(6).label("Username"),
     password: Yup.string().required().min(6).label("Password"),
     name: Yup.string().required().label("Name"),
   }); // This is the validation schema for the form
+
+  const onSubmit = async (values: any, { resetForm }: any) => {
+    setIsLoading(true);
+
+    const { data, error } = await supabase.auth.signUp({
+      email: values.username,
+      password: values.password,
+    });
+
+    if (error) return alert(error.message);
+    setIsLoading(false);
+    if (data.user) {
+      resetForm();
+      fetchSession(); // This is the function to fetch the session
+    } 
+  };
 
   return (
     <View style={styles.container}>
@@ -21,9 +51,7 @@ export default function RegisterScreen() {
       />
       <Formik
         initialValues={{ username: "", password: "", name: "" }}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={onSubmit}
         validfatyionSchema={validationShema} // This is the validation schema for the form
       >
         {({ handleSubmit }) => (
@@ -39,11 +67,15 @@ export default function RegisterScreen() {
               keybordType="password"
             />
 
-            <Button onPress={handleSubmit} title="Register" />
+            <Submit
+              disabled={isLoading}
+              onPress={(e: GestureResponderEvent) => handleSubmit()}
+              text={isLoading ? "Creating ..." : "Register"}
+            />
           </View>
         )}
       </Formik>
-      <Link href={"/LoginScreen/"} asChild>
+      <Link href={"/(user)/profile"} asChild>
         <Button style={styles.button} title="Back" />
       </Link>
     </View>
@@ -60,7 +92,7 @@ const styles = StyleSheet.create({
     width: "70%",
     position: "absolute",
     alignSelf: "center",
-    bottom: 40,
+    bottom: 20,
     marginTop: "auto",
   },
   image: {

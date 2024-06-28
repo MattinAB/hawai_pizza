@@ -5,7 +5,7 @@ import { View, Text } from "@/src/components/Themed";
 import { useLocalSearchParams } from "expo-router";
 import products from "@/assets/data/products";
 import Colors from "@/src/constants/Colors";
-import { useCart } from "../../provider/CartContext";
+import { useCart } from "@/src/app/provider/CartContext";
 import { PizzaSize } from "@/assets/types";
 import { useRouter } from "expo-router";
 

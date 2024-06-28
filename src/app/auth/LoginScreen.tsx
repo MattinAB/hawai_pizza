@@ -1,16 +1,45 @@
-import React from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  GestureResponderEvent,
+} from "react-native";
 import Button from "@/src/components/Button";
 import { Formik } from "formik";
 import FormField from "@/src/components/formik/FormFeild";
 import * as Yup from "yup";
-import { Link } from "expo-router";
+import { Link, Redirect } from "expo-router";
+import Submit from "@/src/components/formik/Submit";
+import { supabase } from "@/src/app/lib/Subabase";
+import { useAuth } from "../provider/AuthContext";
 
 export default function LoginScreen() {
+  const [isLoading, setIsLoading] = useState(false); // This is the state for the loading spinner
+  const { fetchSession } = useAuth();
   const validationShema = Yup.object().shape({
     username: Yup.string().required().min(6).label("Username"),
     password: Yup.string().required().min(6).label("Password"),
   }); // This is the validation schema for the form
+
+  const onSubmit = async (values: any, { resetForm }: any) => {
+    setIsLoading(true);
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: values.username,
+      password: values.password,
+    });
+    if (error) {
+      alert(error.message);
+      setIsLoading(false);
+    }
+    setIsLoading(false);
+    if (data.user) {
+      resetForm();
+      fetchSession(); // This is the function to fetch the session
+    }
+   
+  };
 
   return (
     <View style={styles.container}>
@@ -20,9 +49,7 @@ export default function LoginScreen() {
       />
       <Formik
         initialValues={{ username: "", password: "" }}
-        onSubmit={(values) => {
-          console.log(values);
-        }}
+        onSubmit={onSubmit}
         validfatyionSchema={validationShema} // This is the validation schema for the form
       >
         {({ handleSubmit }) => (
@@ -35,12 +62,15 @@ export default function LoginScreen() {
               secureTextEntry={true}
               keybordType="password"
             />
-
-            <Button onPress={handleSubmit} title="Sing In" />
+            <Submit
+              disabled={isLoading}
+              onPress={(e: GestureResponderEvent) => handleSubmit()}
+              text={isLoading ? "Signing......" : "Sign In"}
+            />
           </View>
         )}
       </Formik>
-      <Link href={"/RegisterScreen/"} asChild>
+      <Link href={"/auth/RegisterScreen/"} asChild>
         <Button title="Register" />
       </Link>
     </View>

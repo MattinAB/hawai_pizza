@@ -1,13 +1,18 @@
 import { Pressable, StyleSheet } from "react-native";
-import { Image } from "react-native";
+import { Image, Button } from "react-native";
 import { Text, View } from "@/src/components/Themed";
 import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import * as imagePicker from "expo-image-picker";
 import Colors from "@/src/constants/Colors";
+import { useAuth } from "@/src/app/provider/AuthContext";
+import LoginScreen from "@/src/app/auth/LoginScreen";
+import { supabase } from "@/src/app/lib/Subabase";
+import { Link, Redirect, useNavigation } from "expo-router";
 
 export default function TabTwoScreen() {
   const [imageUri, setImageUri] = React.useState("");
+  const { sessions, setProfile, isAdmin } = useAuth();
 
   const ImageRequest = async () => {
     try {
@@ -23,6 +28,21 @@ export default function TabTwoScreen() {
     } catch (error) {
       console.log("Error reading an image", error);
     }
+  };
+
+  if (!sessions) {
+    return (
+      <View style={styles.loginContainer}>
+        <LoginScreen />
+      </View>
+    );
+  }
+  // if (!profile) return <Redirect href={"/"} />;
+  // if (isAdmin) return <Redirect href={"/"} />;
+
+  const onLogout = () => {
+    supabase.auth.signOut();
+    setProfile(null);
   };
 
   return (
@@ -41,14 +61,20 @@ export default function TabTwoScreen() {
           />
         )}
       </Pressable>
-      <Text style={styles.title}>mattin.a@outlook.com</Text>
-      <Pressable style={styles.signOut}>
+      <Text style={styles.title}>{sessions?.user.email}</Text>
+      <Pressable style={styles.signOut} onPress={onLogout}>
         <FontAwesome
           name="sign-out"
           size={40}
           color={Colors.light.tabIconSelected}
         />
       </Pressable>
+
+      {isAdmin && (
+        <Link style={{ fontSize: 20, color: Colors.light.tint }} href={"/"}>
+          Admin
+        </Link>
+      )}
     </View>
   );
 }
@@ -57,6 +83,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
+  },
+  loginContainer: {
+    flex: 1,
   },
   title: {
     fontSize: 20,
@@ -85,5 +114,6 @@ const styles = StyleSheet.create({
     width: 70,
     borderRadius: 35,
     marginTop: 50,
+    marginBottom: 20,
   },
 });

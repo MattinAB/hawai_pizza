@@ -8,14 +8,14 @@ type Props = {
   style?: ViewStyle;
 };
 
-export default function ButtonComponent({
+export default function Button({
   onPress,
   title,
   style,
   ...otherProps
 }: Props) {
   return (
-    <Pressable style={[styles.container, style]} onPress={onPress}>
+    <Pressable style={[styles.container, style]} {...otherProps} onPress={onPress}>
       <Text style={styles.text}>{title}</Text>
     </Pressable>
   );
