@@ -1,25 +1,48 @@
 import React, { useState } from "react";
-import { ActivityIndicator, Button, Image, Pressable, StyleSheet } from "react-native";
-import { Link, Stack } from "expo-router";
+import {
+  ActivityIndicator,
+  Alert,
+  Button,
+  Image,
+  Pressable,
+  StyleSheet,
+} from "react-native";
+import { Link, Stack, useRouter } from "expo-router";
 import { View, Text } from "@/src/components/Themed";
 import { useLocalSearchParams } from "expo-router";
-import products from "@/assets/data/products";
 import Colors from "@/src/constants/Colors";
-
+import Buttton from "@/src/components/Button";
 import { FontAwesome } from "@expo/vector-icons";
-import { useProductId } from "@/src/api/product";
+import { useDeleteProduct, useProductId } from "@/src/api/product";
 
 export default function ProductDetailsScreen() {
-  const { id:idString } = useLocalSearchParams();
-  const id = parseFloat( typeof idString === 'string' ? idString : idString?.[0] ?? "" );  
+  const { id: idString } = useLocalSearchParams();
+  const id = parseFloat(
+    typeof idString === "string" ? idString : idString?.[0] ?? ""
+  );
 
-const { data:product, error, isLoading } = useProductId( id);
+  const router = useRouter();
 
+  const { mutate: deleteProduct } = useDeleteProduct();
 
-if (isLoading) return <ActivityIndicator />;
+  const { data: product, error, isLoading } = useProductId(id);
 
-if (error || !product) return <Text>Failed to fetch product</Text>;
+  if (isLoading) return <ActivityIndicator />;
 
+  if (error || !product) return <Text>Failed to fetch product</Text>;
+
+  const hadleDelete = () => {
+    Alert.alert("Delete", "ARE YOU SURE YOU WANT TO DELETE ?", [
+      { text: "No", onPress: () => null },
+      {
+        text: "Yes",
+        onPress: () => {
+          deleteProduct(id), router.back();
+        },
+        style: "destructive",
+      },
+    ]);
+  };
 
   return (
     <View style={styles.container}>
@@ -42,9 +65,17 @@ if (error || !product) return <Text>Failed to fetch product</Text>;
           ),
         }}
       />
-      <Image style={styles.image} source={{ uri: product?.image ?? undefined}} />
+      <Image
+        style={styles.image}
+        source={{ uri: product?.image ?? undefined }}
+      />
       <Text style={styles.title}>{product?.name}</Text>
       <Text style={styles.price}>${product?.price}</Text>
+      <Buttton
+        style={styles.deleteButton}
+        title="Delete"
+        onPress={hadleDelete}
+      />
     </View>
   );
 }
@@ -70,5 +101,8 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     color: Colors.light.tint,
     marginVertical: 20,
+  },
+  deleteButton: {
+    marginTop: 50,
   },
 });

@@ -19,8 +19,10 @@ export default function Create() {
   const { mutate: updateProduct } = useUpdateProduct();
 
   const { id: isString } = useLocalSearchParams();
-  const id = parseFloat( typeof isString === "string" ? isString : isString?.[0] || "");
-  
+  const id = parseFloat(
+    typeof isString === "string" ? isString : isString?.[0] || ""
+  );
+
   const isUpdated = !!isString as boolean; // This is the line that has been changed
   const handleDelete = () => {
     console.log("Delete");
@@ -74,7 +76,7 @@ export default function Create() {
               onPress={handleSubmit}
               title={isUpdated ? "Update" : "Submit"}
             />
-            {isUpdated && <Button title="Delete" onPress={onDelete} />}
+            {/* {isUpdated && <Button title="Delete" onPress={onDelete} />} */}
           </>
         )}
       </Formik>
