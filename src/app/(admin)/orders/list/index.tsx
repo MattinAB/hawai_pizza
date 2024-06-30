@@ -1,9 +1,18 @@
 import { StyleSheet, FlatList, Platform } from "react-native";
 import { Text, View } from "@/src/components/Themed";
-import orders from "@/assets/data/orders";
 import OrderCard from "@/src/components/orderCard";
+import { useOrderList } from "@/src/api/orders";
+import { ActivityIndicator } from "react-native-paper";
+import { useOrderSubscription } from "@/src/api/orders/Subscription";
 
 export default function TabTwoScreen() {
+  const { data: orders, error, isLoading } = useOrderList({ archived: false });
+
+  if (isLoading) return <ActivityIndicator />;
+  if (error) return <Text>{error.message}</Text>;
+
+  useOrderSubscription();
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Oreders</Text>

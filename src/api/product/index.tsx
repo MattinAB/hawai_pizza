@@ -1,7 +1,8 @@
-import React from "react";
 import { supabase } from "@/src/app/lib/Subabase";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Product } from "@/assets/types";
+import { Tables } from "@/assets/types";
+
+type Product = Tables<"products">;
 
 export const useProductList = () => {
   return useQuery<Product[]>({

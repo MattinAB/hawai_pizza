@@ -6,8 +6,10 @@ export default function AuthLayout() {
 
   if (sessions) return <Redirect href={"/"} />;
 
-  return <Stack >
-    <Stack.Screen name="RegisterScreen" options={{headerShown:false}}/>
-    <Stack.Screen name="LoginScreen" options={{headerShown:false}}/>
-  </Stack>;
+  return (
+    <Stack>
+      <Stack.Screen name="RegisterScreen" options={{ headerShown: false }} />
+      <Stack.Screen name="LoginScreen" options={{ headerShown: false }} />
+    </Stack>
+  );
 }

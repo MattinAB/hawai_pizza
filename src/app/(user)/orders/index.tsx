@@ -1,9 +1,16 @@
 import { StyleSheet, FlatList, Platform } from "react-native";
 import { Text, View } from "@/src/components/Themed";
-import orders from "@/assets/data/orders";
 import OrderCard from "@/src/components/orderCard";
+import { useMyOrders } from "@/src/api/orders";
+import { ActivityIndicator } from "react-native-paper";
 
 export default function TabTwoScreen() {
+  const { data: orders, isLoading, error } = useMyOrders();
+
+  if (isLoading) return <ActivityIndicator />;
+  if (error) return <Text>Error To Fetching Orders.</Text>;
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Oreders</Text>

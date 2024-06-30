@@ -9,7 +9,7 @@ import CartListItem from "../components/CartListItem";
 import Colors from "../constants/Colors";
 
 export default function Cart() {
-  const { items, total } = useCart();
+  const { items, total, onChekout } = useCart();
   return (
     <View>
       <FlatList
@@ -21,7 +21,13 @@ export default function Cart() {
       {total > 0 && <Text style={styles.total}>Total:{total}</Text>}
       <View style={styles.checkoutButton}>
         {total > 0 && (
-          <Button title="Checkout" color="#fff" onPress={() => {}} />
+          <Button
+            title="Checkout"
+            color="#fff"
+            onPress={() => {
+              onChekout();
+            }}
+          />
         )}
       </View>
 

@@ -3,16 +3,28 @@ import { Stack, useLocalSearchParams } from "expo-router";
 import React from "react";
 import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
 import OrderDetailsCard from "@/src/components/OrderDetailsCard";
-import Orders from "@/assets/data/orders";
 import OrderListItem from "@/src/components/OrderListItem";
 import { OrderStatusList } from "@/assets/types";
+import { useOrderDetails } from "@/src/api/orders";
+import { ActivityIndicator } from "react-native-paper";
+import { useUpdateOrder } from "@/src/api/orderItems";
 
 export default function OrderDetails() {
-  const { id } = useLocalSearchParams();
+  const { id: isString } = useLocalSearchParams();
 
-  const order = Orders.find((o) => o.id.toString() === id);
+  const id = parseFloat(
+    typeof isString === "string" ? isString : isString?.[0] || ""
+  );
 
-  if (!order) return <Text>Order not found</Text>;
+  const { data: order, error, isLoading } = useOrderDetails(id);
+  const { mutate: updateOrder } = useUpdateOrder();
+
+  if (isLoading) return <ActivityIndicator />;
+  if (error || !order) return <Text>Failed To fetch !</Text>;
+
+  const updateStatus = (status: string) => {
+    updateOrder({ id, updatedField: { status } });
+  };
 
   return (
     <View style={styles.container}>
@@ -28,7 +40,7 @@ export default function OrderDetails() {
               {OrderStatusList.map((status) => (
                 <Pressable
                   key={status}
-                  onPress={() => console.warn("Update status")}
+                  onPress={() => updateStatus(status)}
                   style={{
                     borderColor: Colors.light.tint,
                     borderWidth: 1,

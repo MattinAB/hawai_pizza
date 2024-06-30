@@ -10,7 +10,7 @@ import Button from "@/src/components/Button";
 import { Formik } from "formik";
 import FormField from "@/src/components/formik/FormFeild";
 import * as Yup from "yup";
-import { Link, Redirect } from "expo-router";
+import { Link } from "expo-router";
 import Submit from "@/src/components/formik/Submit";
 import { supabase } from "@/src/app/lib/Subabase";
 import { useAuth } from "../provider/AuthContext";
@@ -38,7 +38,6 @@ export default function LoginScreen() {
       resetForm();
       fetchSession(); // This is the function to fetch the session
     }
-   
   };
 
   return (

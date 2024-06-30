@@ -1,13 +1,13 @@
 import React from "react";
 import { Image, Pressable, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "./Themed";
-import { Product } from "../../assets/types";
+import { Tables } from "../../assets/types";
 import Colors from "../constants/Colors";
 import { MonoText } from "./StyledText";
 import { Link, useSegments } from "expo-router";
 
 type Props = {
-  product: Product;
+  product: Tables<"products">;
   onPress?: () => void;
 };
 

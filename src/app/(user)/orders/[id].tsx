@@ -1,17 +1,29 @@
 import Colors from "@/src/constants/Colors";
 import { Stack, useLocalSearchParams } from "expo-router";
 import React from "react";
-import { View, Text, StyleSheet, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+} from "react-native";
 import OrderDetailsCard from "@/src/components/OrderDetailsCard";
-import Orders from "@/assets/data/orders";
 import OrderListItem from "@/src/components/OrderListItem";
+import { useOrderDetails } from "@/src/api/orders";
+import { useUpdateOrderSubcription } from "@/src/api/orders/Subscription";
 
 export default function OrderDetails() {
-  const { id } = useLocalSearchParams();
+  const { id: isString } = useLocalSearchParams();
+  const id = parseFloat(
+    typeof isString === "string" ? isString : isString?.[0] || ""
+  );
 
-  const order = Orders.find((o) => o.id.toString() === id);
+  const { data: order, error, isLoading } = useOrderDetails(id);
+  useUpdateOrderSubcription(id);
 
-  if (!order) return <Text>Order not found</Text>;
+  if (isLoading) return <ActivityIndicator />;
+  if (error) return <Text>{error.message}</Text>;
 
   return (
     <View style={styles.container}>
