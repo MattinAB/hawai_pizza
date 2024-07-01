@@ -24,15 +24,6 @@ export default function Create() {
   );
 
   const isUpdated = !!isString as boolean; // This is the line that has been changed
-  const handleDelete = () => {
-    console.log("Delete");
-  };
-  const onDelete = () => {
-    Alert.alert("Delete", "Are You Sure You Want To Delete ?", [
-      { text: "No", onPress: () => null },
-      { text: "Yes", onPress: () => handleDelete(), style: "destructive" },
-    ]);
-  };
 
   return (
     <View style={styles.container}>
@@ -71,7 +62,7 @@ export default function Create() {
           <>
             <ImagePickerField name="image" />
             <FormField name="name" />
-            <FormField name="price" keyboardType={"numeric"} />
+            <FormField name="price" keyboardType={"numbers-and-punctuation" || "numeric"} />
             <Button
               onPress={handleSubmit}
               title={isUpdated ? "Update" : "Submit"}

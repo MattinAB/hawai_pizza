@@ -2,6 +2,8 @@ import { View, Text, StyleSheet, Image } from "react-native";
 import React from "react";
 import Colors from "../constants/Colors";
 import { Tables } from "../../assets/types";
+import RemoteImage from "./remoteImage";
+import { defaultPizzaImage } from "./ProductListItem";
 
 type OrderItemListItemProps = {
   item: { products: Tables<"products"> } & Tables<"order_items">;
@@ -10,11 +12,13 @@ type OrderItemListItemProps = {
 const OrderDetailsCard = ({ item }: OrderItemListItemProps) => {
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: item.products.image || undefined }}
+      <RemoteImage
         style={styles.image}
+        fallback={defaultPizzaImage}
+        path={item.products.image || defaultPizzaImage}
         resizeMode="contain"
       />
+
       <View style={{ flex: 1 }}>
         <Text style={styles.title}>{item.products.name}</Text>
         <View style={styles.subtitleContainer}>

@@ -7,11 +7,11 @@ import { useOrderSubscription } from "@/src/api/orders/Subscription";
 
 export default function TabTwoScreen() {
   const { data: orders, error, isLoading } = useOrderList({ archived: false });
+  useOrderSubscription();
 
   if (isLoading) return <ActivityIndicator />;
   if (error) return <Text>{error.message}</Text>;
 
-  useOrderSubscription();
 
   return (
     <View style={styles.container}>

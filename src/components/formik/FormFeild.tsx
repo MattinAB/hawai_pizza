@@ -21,6 +21,7 @@ export default function FormField({ name, ...props }: Props) {
           onChangeText={handleChange(name)}
           onBlur={handleBlur(name)}
           {...props}
+        
         />
       </View>
       <ErrorMessage

@@ -5,6 +5,9 @@ import { Tables } from "../../assets/types";
 import Colors from "../constants/Colors";
 import { MonoText } from "./StyledText";
 import { Link, useSegments } from "expo-router";
+import RemoteImage from "./remoteImage"; // Import the RemoteImage component
+
+export const defaultPizzaImage = require("../../assets/images/defaultPizza.png");
 
 type Props = {
   product: Tables<"products">;
@@ -17,11 +20,13 @@ export default function ProductListItem({ product, onPress }: Props) {
   return (
     <Link href={`/${segment[0]}/menu/${product.id}`} asChild>
       <Pressable style={styles.container} onPress={onPress}>
-        <Image
+        <RemoteImage
           style={styles.image}
-          source={{ uri: product.image ?? undefined }}
+          fallback={defaultPizzaImage}
+          path={product?.image || defaultPizzaImage}
           resizeMode="contain"
         />
+
         <MonoText style={styles.product}>{product.name}</MonoText>
         <Text style={styles.prise}>${product.price}</Text>
       </Pressable>

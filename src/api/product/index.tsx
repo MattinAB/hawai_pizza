@@ -36,16 +36,19 @@ export const useInsertProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    async mutationFn(data: Omit<Product, "id">) {
-      const { error } = await supabase.from("products").insert({
-        name: data.name,
-        price: data.price,
-        image: data.image,
-      });
+    async mutationFn(data: any) {
+      const { data: newProduct, error } = await supabase
+        .from("products")
+        .insert({
+          name: data.name,
+          price: data.price,
+          image: data.image,
+        });
 
       if (error) {
         throw error;
       }
+      return newProduct;
     },
     async onSuccess() {
       await queryClient.invalidateQueries(["products"]);
@@ -60,11 +63,15 @@ export const useUpdateProduct = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    async mutationFn({ id, ...update }: Product) {
-      const { data, error } = await supabase
+    async mutationFn(data: any) {
+      const { data: updateProduct, error } = await supabase
         .from("products")
-        .update(update)
-        .eq("id", id)
+        .update({
+          name: data.name,
+          image: data.image,
+          price: data.price,
+        })
+        .eq("id", data.id)
         .select();
 
       if (error) {

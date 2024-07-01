@@ -18,9 +18,9 @@ export default function OrderDetails() {
   const id = parseFloat(
     typeof isString === "string" ? isString : isString?.[0] || ""
   );
+  useUpdateOrderSubcription(id);
 
   const { data: order, error, isLoading } = useOrderDetails(id);
-  useUpdateOrderSubcription(id);
 
   if (isLoading) return <ActivityIndicator />;
   if (error) return <Text>{error.message}</Text>;

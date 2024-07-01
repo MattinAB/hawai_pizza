@@ -4,6 +4,8 @@ import Colors from "../constants/Colors";
 import { CartItem } from "@/assets/types";
 import { FontAwesome } from "@expo/vector-icons";
 import { useCart } from "@/src/app/provider/CartContext";
+import RemoteImage from "./remoteImage";
+import { defaultPizzaImage } from "./ProductListItem";
 
 type CartListItemProps = {
   cartItem: CartItem;
@@ -13,11 +15,13 @@ const CartListItem = ({ cartItem }: CartListItemProps) => {
   const { updateQuantity } = useCart();
   return (
     <View style={styles.container}>
-      <Image
-        source={{ uri: cartItem.product.image || undefined }}
+      <RemoteImage
         style={styles.image}
+        fallback={defaultPizzaImage}
+        path={cartItem?.product.image || defaultPizzaImage}
         resizeMode="contain"
       />
+
       <View style={{ flex: 1 }}>
         <Text style={styles.title}>{cartItem.product.name}</Text>
         <View style={styles.subtitleContainer}>

@@ -15,9 +15,8 @@ export default function OrderDetails() {
   const id = parseFloat(
     typeof isString === "string" ? isString : isString?.[0] || ""
   );
-
-  const { data: order, error, isLoading } = useOrderDetails(id);
   const { mutate: updateOrder } = useUpdateOrder();
+  const { data: order, error, isLoading } = useOrderDetails(id);
 
   if (isLoading) return <ActivityIndicator />;
   if (error || !order) return <Text>Failed To fetch !</Text>;

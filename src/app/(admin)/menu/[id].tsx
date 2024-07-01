@@ -14,6 +14,8 @@ import Colors from "@/src/constants/Colors";
 import Buttton from "@/src/components/Button";
 import { FontAwesome } from "@expo/vector-icons";
 import { useDeleteProduct, useProductId } from "@/src/api/product";
+import RemoteImage from "@/src/components/remoteImage";
+import { defaultPizzaImage } from "@/src/components/ProductListItem";
 
 export default function ProductDetailsScreen() {
   const { id: idString } = useLocalSearchParams();
@@ -65,10 +67,17 @@ export default function ProductDetailsScreen() {
           ),
         }}
       />
-      <Image
+      <RemoteImage
+        style={styles.image}
+        fallback={defaultPizzaImage}
+        path={product?.image || defaultPizzaImage}
+        resizeMode="contain"
+      />
+
+      {/* <Image
         style={styles.image}
         source={{ uri: product?.image ?? undefined }}
-      />
+      /> */}
       <Text style={styles.title}>{product?.name}</Text>
       <Text style={styles.price}>${product?.price}</Text>
       <Buttton

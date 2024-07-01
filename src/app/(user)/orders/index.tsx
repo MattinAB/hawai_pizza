@@ -10,7 +10,6 @@ export default function TabTwoScreen() {
   if (isLoading) return <ActivityIndicator />;
   if (error) return <Text>Error To Fetching Orders.</Text>;
 
-
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Oreders</Text>

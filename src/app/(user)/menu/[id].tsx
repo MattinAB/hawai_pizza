@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { ActivityIndicator, Button, Image, Pressable, StyleSheet } from "react-native";
+import {
+  ActivityIndicator,
+  Button,
+  Pressable,
+  StyleSheet,
+} from "react-native";
 import { Stack } from "expo-router";
 import { View, Text } from "@/src/components/Themed";
 import { useLocalSearchParams } from "expo-router";
@@ -8,6 +13,8 @@ import { useCart } from "@/src/app/provider/CartContext";
 import { PizzaSize } from "@/assets/types";
 import { useRouter } from "expo-router";
 import { useProductId } from "@/src/api/product";
+import RemoteImage from "@/src/components/remoteImage";
+import { defaultPizzaImage } from "@/src/components/ProductListItem";
 
 export default function ProductDetailsScreen() {
   const [selectedSize, setSelectedSize] = useState("M");
@@ -16,17 +23,18 @@ export default function ProductDetailsScreen() {
   const { AddItem } = useCart();
 
   const { id } = useLocalSearchParams();
-  
-  const { data:product, error, isLoading } = useProductId(parseInt( typeof id === 'string' ? id : id[0]));
 
+  const {
+    data: product,
+    error,
+    isLoading,
+  } = useProductId(parseInt(typeof id === "string" ? id : id[0]));
 
   if (isLoading) return <ActivityIndicator />;
-  
-  if (error || !product) return <Text>Failed to fetch product</Text>;  
-  
-  
-  const sizes = ["S", "M", "L", "XL"];
 
+  if (error || !product) return <Text>Failed to fetch product</Text>;
+
+  const sizes = ["S", "M", "L", "XL"];
 
   const AddToCart = () => {
     if (!product) return null;
@@ -36,7 +44,14 @@ export default function ProductDetailsScreen() {
   return (
     <View style={styles.container}>
       <Stack.Screen options={{ title: "Details" }} />
-      <Image style={styles.image} source={{ uri: product?.image || undefined}} />
+
+      <RemoteImage
+        style={styles.image}
+        fallback={defaultPizzaImage}
+        path={product?.image || defaultPizzaImage}
+        resizeMode="contain"
+      />
+
       <Text style={styles.price}>${product?.price}</Text>
       <Text>Select Size</Text>
       <View style={styles.sizes}>

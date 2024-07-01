@@ -53,6 +53,11 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     marginVertical: 5,
   },
+  total: {
+    color: Colors.light.tint,
+    fontWeight: "bold",
+    fontSize: 20,
+  },
   orderStatus: {
     color: "black",
     fontWeight: "bold",
