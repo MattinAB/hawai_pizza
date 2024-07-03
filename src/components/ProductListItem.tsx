@@ -20,6 +20,7 @@ export default function ProductListItem({ product, onPress }: Props) {
   return (
     <Link href={`/${segment[0]}/menu/${product.id}`} asChild>
       <Pressable style={styles.container} onPress={onPress}>
+ 
         <RemoteImage
           style={styles.image}
           fallback={defaultPizzaImage}

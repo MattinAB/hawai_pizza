@@ -1,7 +1,6 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View} from "react-native";
 import { Link, Redirect } from "expo-router";
-import Colors from "../constants/Colors";
 import Button from "../components/Button";
 import { useAuth } from "@/src/app/provider/AuthContext";
 import { ActivityIndicator } from "react-native-paper";

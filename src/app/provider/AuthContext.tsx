@@ -1,7 +1,13 @@
-import { PropsWithChildren, createContext, useContext, useState } from "react";
+import {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { supabase } from "@/src/app/lib/Subabase";
 import { Session } from "@supabase/supabase-js";
-
+ 
 type AuthContextType = {
   sessions: Session | null;
   profile: null;
@@ -27,6 +33,10 @@ export default function AuthProvider({ children }: PropsWithChildren) {
   const [isAdmin, setIsAdmin] = useState(false);
   // console.log("profile", profile);
 
+  useEffect(() => {
+    fetchSession();
+  }, []);
+
   const fetchSession = async () => {
     const {
       data: { session },
@@ -42,7 +52,7 @@ export default function AuthProvider({ children }: PropsWithChildren) {
         .select("*")
         .eq("id", session.user.id)
         .single();
-      if (data.group === "ADMIN") {
+      if (data?.group === "ADMIN") {
         setIsAdmin(true);
         setProfile(data);
       } else {

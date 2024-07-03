@@ -11,6 +11,9 @@ web-build/
 # lib
 *lib/
 
+#.ENV
+.env
+
 # Native
 *.orig.*
 *.jks
