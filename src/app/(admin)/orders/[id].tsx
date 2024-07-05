@@ -8,6 +8,7 @@ import { OrderStatusList } from "@/assets/types";
 import { useOrderDetails } from "@/src/api/orders";
 import { ActivityIndicator } from "react-native-paper";
 import { useUpdateOrder } from "@/src/api/orderItems";
+import { notifiUserOrderUpdate } from "../../lib/notifications";
 
 export default function OrderDetails() {
   const { id: isString } = useLocalSearchParams();
@@ -21,8 +22,11 @@ export default function OrderDetails() {
   if (isLoading) return <ActivityIndicator />;
   if (error || !order) return <Text>Failed To fetch !</Text>;
 
-  const updateStatus = (status: string) => {
+  const updateStatus = async (status: string) => {
     updateOrder({ id, updatedField: { status } });
+    if (order) {
+      await notifiUserOrderUpdate({ ...order, status });
+    }
   };
 
   return (

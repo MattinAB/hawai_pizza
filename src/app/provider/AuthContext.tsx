@@ -7,7 +7,7 @@ import {
 } from "react";
 import { supabase } from "@/src/app/lib/Subabase";
 import { Session } from "@supabase/supabase-js";
- 
+
 type AuthContextType = {
   sessions: Session | null;
   profile: null;
@@ -29,7 +29,7 @@ const AuthContext = createContext<AuthContextType>({
 export default function AuthProvider({ children }: PropsWithChildren) {
   const [sessions, setSessions] = useState<any | null>(null);
   const [loading, setLoading] = useState(true);
-  const [profile, setProfile] = useState(null);
+  const [profile, setProfile] = useState<any | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   // console.log("profile", profile);
 

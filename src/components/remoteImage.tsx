@@ -1,6 +1,7 @@
 import { Image } from "react-native";
 import React, { ComponentProps, useEffect, useMemo, useState } from "react";
 import { supabase } from "@/src/app/lib/Subabase";
+import { defaultPizzaImage } from "./ProductListItem";
 
 type RemoteImageProps = {
   path?: string;
@@ -33,6 +34,7 @@ const RemoteImage = ({ path, fallback, ...imageProps }: RemoteImageProps) => {
   }, [path]);
 
   if (!image) {
+    return;
   }
 
   return <Image source={{ uri: image || fallback }} {...imageProps} />;
