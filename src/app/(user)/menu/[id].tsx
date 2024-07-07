@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   ActivityIndicator,
   Button,
+  Platform,
   Pressable,
   StyleSheet,
 } from "react-native";
@@ -22,13 +23,15 @@ export default function ProductDetailsScreen() {
 
   const { AddItem } = useCart();
 
-  const { id } = useLocalSearchParams();
+  const { id: idString } = useLocalSearchParams();
 
   const {
     data: product,
     error,
     isLoading,
-  } = useProductId(parseInt(typeof id === "string" ? id : id[0]));
+  } = useProductId(
+    parseInt(typeof idString === "string" ? idString : idString?.[0] ?? "")
+  );
 
   if (isLoading) return <ActivityIndicator />;
 
@@ -79,7 +82,7 @@ export default function ProductDetailsScreen() {
         ))}
       </View>
       <View style={styles.CartButton}>
-        <Button title="Add To Cart" color="#fff" onPress={() => AddToCart()} />
+        <Button title="Add To Cart" color={Platform.OS === "android" ? '' : '#fff'} onPress={() => AddToCart()} />
       </View>
     </View>
   );
