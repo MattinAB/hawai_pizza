@@ -4,9 +4,9 @@ import {
   Platform,
   ActivityIndicator,
 } from "react-native";
-import { Text, View } from "@/src/components/Themed";
-import OrderCard from "@/src/components/orderCard";
-import { useOrderList } from "@/src/api/orders";
+import { Text, View } from "../../../../components/Themed";
+import OrderCard from "../../../../components/orderCard";
+import { useOrderList } from "../../../../api/orders";
 
 export default function TabTwoScreen() {
   const { data: orders, error, isLoading } = useOrderList({ archived: true });

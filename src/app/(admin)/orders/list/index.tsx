@@ -1,9 +1,9 @@
 import { StyleSheet, FlatList, Platform } from "react-native";
-import { Text, View } from "@/src/components/Themed";
-import OrderCard from "@/src/components/orderCard";
-import { useOrderList } from "@/src/api/orders";
+import { Text, View } from "../../../../components/Themed";
+import OrderCard from "../../../../components/orderCard";
+import { useOrderList } from "../../../../api/orders";
 import { ActivityIndicator } from "react-native-paper";
-import { useOrderSubscription } from "@/src/api/orders/Subscription";
+import { useOrderSubscription } from "../../../../api/orders/Subscription";
 
 export default function TabTwoScreen() {
   const { data: orders, error, isLoading } = useOrderList({ archived: false });

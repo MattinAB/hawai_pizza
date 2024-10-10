@@ -1,12 +1,12 @@
 import { Pressable, StyleSheet } from "react-native";
 import { Image } from "react-native";
-import { Text, View } from "@/src/components/Themed";
+import { Text, View } from "../../components/Themed";
 import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import * as imagePicker from "expo-image-picker";
-import Colors from "@/src/constants/Colors";
-import { useAuth } from "@/src/app/provider/AuthContext";
-import { supabase } from "@/src/app/lib/Subabase";
+import Colors from "../../constants/Colors";
+import { useAuth } from "../../app/provider/AuthContext";
+import { supabase } from "../../app/lib/Subabase";
 import { Redirect } from "expo-router";
 
 export default function TabTwoScreen() {

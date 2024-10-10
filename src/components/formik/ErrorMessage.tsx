@@ -9,5 +9,5 @@ export default function ErrorMessage({
   visible: boolean;
 }) {
   if (!error || !visible) return null;
-  return <Text style={{ color: "red" }}>{error}</Text>;
+  return <Text  style={{ color: "red" }}>{error}</Text>;
 } // src/components/formik/ErrorMessage.tsx

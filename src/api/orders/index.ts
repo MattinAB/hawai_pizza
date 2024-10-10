@@ -1,6 +1,6 @@
-import {  OrderStatus, Tables , insertTables } from "@/assets/types";
-import { supabase } from "@/src/app/lib/Subabase";
-import { useAuth } from "@/src/app/provider/AuthContext";
+import {  OrderStatus, Tables , insertTables } from "../../../assets/types";
+import { supabase } from "../../app/lib/Subabase";
+import { useAuth } from "../../app/provider/AuthContext";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 type Order = Tables<"orders">;

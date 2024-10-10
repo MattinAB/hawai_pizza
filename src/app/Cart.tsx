@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet } from "react-native";
-import { View, Text } from "@/src/components/Themed";
+import { View, Text } from "../components/Themed";
 import { StatusBar } from "expo-status-bar";
 import { Button, Platform } from "react-native";
-import { useCart } from "@/src/app/provider/CartContext";
+import { useCart } from "../app/provider/CartContext";
 import { FlatList } from "react-native";
 import CartListItem from "../components/CartListItem";
 import Colors from "../constants/Colors";

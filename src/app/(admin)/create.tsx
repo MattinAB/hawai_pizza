@@ -1,12 +1,12 @@
 import { Formik } from "formik";
 import React from "react";
-import { View, StyleSheet, Alert } from "react-native";
-import Button from "@/src/components/Button";
+import { View, StyleSheet } from "react-native";
+import Button from "../../components/Button";
 import * as yup from "yup"; // for everything
-import FormField from "@/src/components/formik/FormFeild";
-import ImagePickerField from "@/src/components/formik/ImagePickerField";
+import FormField from "../../components/formik/FormFeild";
+import ImagePickerField from "../..//components/formik/ImagePickerField";
 import { Stack, useLocalSearchParams, useRouter } from "expo-router";
-import { useInsertProduct, useUpdateProduct } from "@/src/api/product";
+import { useInsertProduct, useUpdateProduct } from "../../api/product";
 
 export default function Create() {
   const validationSchema = yup.object().shape({
@@ -62,7 +62,10 @@ export default function Create() {
           <>
             <ImagePickerField name="image" />
             <FormField name="name" />
-            <FormField name="price" keyboardType={"numbers-and-punctuation" || "numeric"} />
+            <FormField
+              name="price"
+              keyboardType={ "numeric"}
+            />
             <Button
               onPress={handleSubmit}
               title={isUpdated ? "Update" : "Submit"}

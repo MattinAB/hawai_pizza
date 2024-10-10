@@ -1,7 +1,7 @@
 import { StyleSheet, FlatList, Platform, SafeAreaView } from "react-native";
-import { Text } from "@/src/components/Themed";
-import OrderCard from "@/src/components/orderCard";
-import { useMyOrders } from "@/src/api/orders";
+import { Text } from "@/components/Themed";
+import OrderCard from "@/components/orderCard";
+import { useMyOrders } from "@/api/orders";
 import { ActivityIndicator } from "react-native-paper";
 
 export default function TabTwoScreen() {

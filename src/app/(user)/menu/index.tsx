@@ -1,9 +1,9 @@
 import React from "react";
 import { ActivityIndicator, FlatList, StyleSheet } from "react-native";
-import { Text, View } from "@/src/components/Themed";
-import ProductListItem from "@/src/components/ProductListItem";
-import { MonoText } from "@/src/components/StyledText";
-import { useProductList } from "@/src/api/product";
+import { Text, View } from "../../../components/Themed";
+import ProductListItem from "../../../components/ProductListItem";
+import { MonoText } from "../../../components/StyledText";
+import { useProductList } from "../../../api/product";
 
 
 export default function TabOneScreen() {

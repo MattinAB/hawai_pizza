@@ -2,9 +2,9 @@ import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
 import { Pressable } from "react-native";
-import Colors from "@/src/constants/Colors";
-import { useColorScheme } from "@/src/components/useColorScheme";
-import { useClientOnlyValue } from "@/src/components/useClientOnlyValue";
+import Colors from "../../constants/Colors";
+import { useColorScheme } from "../../components/useColorScheme";
+import { useClientOnlyValue } from "../../components/useClientOnlyValue";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
@@ -35,7 +35,7 @@ export default function TabLayout() {
             <TabBarIcon name="cutlery" color={color} />
           ),
           headerRight: () => (
-            <Link href="/modal" asChild>
+            <Link href="./modal" asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome

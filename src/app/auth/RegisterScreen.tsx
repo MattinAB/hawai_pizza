@@ -6,14 +6,14 @@ import {
   Image,
   GestureResponderEvent,
 } from "react-native";
-import Button from "@/src/components/Button";
+import Button from "../../components/Button";
 
 import { Formik } from "formik";
-import FormField from "@/src/components/formik/FormFeild";
+import FormField from "../../components/formik/FormFeild";
 import * as Yup from "yup";
 import { Link } from "expo-router";
-import { supabase } from "@/src/app/lib/Subabase";
-import Submit from "@/src/components/formik/Submit";
+import { supabase } from "../../app/lib/Subabase";
+import Submit from "../../components/formik/Submit";
 import { useAuth } from "../provider/AuthContext";
 
 export default function RegisterScreen() {
@@ -45,10 +45,10 @@ export default function RegisterScreen() {
 
   return (
     <View style={styles.container}>
-      <Image
+      {/* <Image
         style={styles.image}
-        source={require("@/assets/images/HawaiPizzaLogo.jpg")}
-      />
+        source={require("../../../assets/images/HawaiPizzaLogo.jpg")}
+      /> */}
       <Formik
         initialValues={{ username: "", password: "", name: "" }}
         onSubmit={onSubmit}

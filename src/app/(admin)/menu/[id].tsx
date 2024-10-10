@@ -1,21 +1,14 @@
-import React, { useState } from "react";
-import {
-  ActivityIndicator,
-  Alert,
-  Button,
-  Image,
-  Pressable,
-  StyleSheet,
-} from "react-native";
+import React from "react";
+import { ActivityIndicator, Alert, Pressable, StyleSheet } from "react-native";
 import { Link, Stack, useRouter } from "expo-router";
-import { View, Text } from "@/src/components/Themed";
+import { View, Text } from "../../../components/Themed";
 import { useLocalSearchParams } from "expo-router";
-import Colors from "@/src/constants/Colors";
-import Buttton from "@/src/components/Button";
+import Colors from "../../../constants/Colors";
+import Buttton from "../../../components/Button";
 import { FontAwesome } from "@expo/vector-icons";
-import { useDeleteProduct, useProductId } from "@/src/api/product";
-import RemoteImage from "@/src/components/remoteImage";
-import { defaultPizzaImage } from "@/src/components/ProductListItem";
+import { useDeleteProduct, useProductId } from "../../../api/product";
+import RemoteImage from "../../../components/remoteImage";
+import { defaultPizzaImage } from "../../..//components/ProductListItem";
 
 export default function ProductDetailsScreen() {
   const { id: idString } = useLocalSearchParams();
@@ -52,7 +45,7 @@ export default function ProductDetailsScreen() {
         options={{
           title: "Details",
           headerRight: () => (
-            <Link href={`/(admin)/create?id=${id}`} asChild>
+            <Link href={`./(admin)/create?id=${id}`} asChild>
               <Pressable>
                 {({ pressed }) => (
                   <FontAwesome

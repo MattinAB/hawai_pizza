@@ -1,5 +1,5 @@
-import {  insertTables, updateTables } from "@/assets/types";
-import { supabase } from "@/src/app/lib/Subabase";
+import {  insertTables, updateTables } from "../../../assets/types";
+import { supabase } from "../../app/lib/Subabase";
 import {  useMutation, useQueryClient} from "@tanstack/react-query";
 
 

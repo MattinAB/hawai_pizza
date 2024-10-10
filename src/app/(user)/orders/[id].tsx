@@ -1,4 +1,4 @@
-import Colors from "@/src/constants/Colors";
+import Colors from "@/constants/Colors";
 import { Stack, useLocalSearchParams } from "expo-router";
 import React from "react";
 import {
@@ -8,10 +8,10 @@ import {
   FlatList,
   ActivityIndicator,
 } from "react-native";
-import OrderDetailsCard from "@/src/components/OrderDetailsCard";
-import OrderListItem from "@/src/components/OrderListItem";
-import { useOrderDetails } from "@/src/api/orders";
-import { useUpdateOrderSubcription } from "@/src/api/orders/Subscription";
+import OrderDetailsCard from "@/components/OrderDetailsCard";
+import OrderListItem from "@/components/OrderListItem";
+import { useOrderDetails } from "@/api/orders";
+import { useUpdateOrderSubcription } from "@/api/orders/Subscription";
 
 export default function OrderDetails() {
   const { id: isString } = useLocalSearchParams();

@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Pressable, StyleSheet, TouchableOpacity } from "react-native";
+import {  Pressable, StyleSheet, TouchableOpacity } from "react-native";
 import { Text } from "./Themed";
 import { Tables } from "../../assets/types";
 import Colors from "../constants/Colors";
@@ -7,7 +7,7 @@ import { MonoText } from "./StyledText";
 import { Link, useSegments } from "expo-router";
 import RemoteImage from "./remoteImage"; // Import the RemoteImage component
 
-export const defaultPizzaImage = require("@/assets/images/defaultPizza.png");
+export const defaultPizzaImage = require("../../assets/images/defaultPizza.png");
 
 type Props = {
   product: Tables<"products">;
@@ -18,7 +18,7 @@ export default function ProductListItem({ product, onPress }: Props) {
   const segment = useSegments();
 
   return (
-    <Link href={`/${segment[0]}/menu/${product.id}`} asChild>
+    <Link href={`./${segment[0]}/menu/${product.id}`} asChild>
       <Pressable style={styles.container} onPress={onPress}>
         <RemoteImage
           style={styles.image}

@@ -1,6 +1,6 @@
-import { supabase } from "@/src/app/lib/Subabase";
+import { supabase } from "../../app/lib/Subabase";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { Tables } from "@/assets/types";
+import { Tables } from "../../../assets/types";
 
 type Product = Tables<"products">;
 

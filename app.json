@@ -4,11 +4,11 @@
     "slug": "hawaiPizza",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/HawaiLogo.png",
+    "icon": "./assets/images/hawai_logo.jpg",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/HawaiLogo.png",
+      "image": "./assets/images/hawai_splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -17,7 +17,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/hawai_splash.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
@@ -27,7 +27,7 @@
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/hawai_splash.png"
     },
     "plugins": [
       "expo-router",

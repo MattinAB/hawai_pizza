@@ -1,13 +1,13 @@
-import Colors from "@/src/constants/Colors";
-import { Stack, useLocalSearchParams } from "expo-router";
+import Colors from "../../../constants/Colors";
+import {useLocalSearchParams } from "expo-router";
 import React from "react";
 import { View, Text, StyleSheet, FlatList, Pressable } from "react-native";
-import OrderDetailsCard from "@/src/components/OrderDetailsCard";
-import OrderListItem from "@/src/components/OrderListItem";
-import { OrderStatusList } from "@/assets/types";
-import { useOrderDetails } from "@/src/api/orders";
+import OrderDetailsCard from "../../../components/OrderDetailsCard";
+import OrderListItem from "../../../components/OrderListItem";
+import { OrderStatusList } from "../../../../assets/types";
+import { useOrderDetails } from "../../../api/orders";
 import { ActivityIndicator } from "react-native-paper";
-import { useUpdateOrder } from "@/src/api/orderItems";
+import { useUpdateOrder } from "../../../api/orderItems";
 import { notifiUserOrderUpdate } from "../../lib/notifications";
 
 export default function OrderDetails() {

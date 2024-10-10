@@ -1,6 +1,6 @@
-import { Image } from "react-native";
+import { ActivityIndicator, Image } from "react-native";
 import React, { ComponentProps, useEffect, useMemo, useState } from "react";
-import { supabase } from "@/src/app/lib/Subabase";
+import { supabase } from "@/app/lib/Subabase";
 import { defaultPizzaImage } from "./ProductListItem";
 
 type RemoteImageProps = {
@@ -34,7 +34,7 @@ const RemoteImage = ({ path, fallback, ...imageProps }: RemoteImageProps) => {
   }, [path]);
 
   if (!image) {
-    return;
+    return <ActivityIndicator />;
   }
 
   return <Image source={{ uri: image || fallback }} {...imageProps} />;

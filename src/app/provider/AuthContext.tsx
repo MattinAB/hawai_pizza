@@ -5,7 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
-import { supabase } from "@/src/app/lib/Subabase";
+import { supabase } from "../../app/lib/Subabase";
 import { Session } from "@supabase/supabase-js";
 
 type AuthContextType = {

@@ -1,8 +1,8 @@
 import { Link, Stack } from "expo-router";
-import { Button, Pressable } from "react-native";
+import { Pressable } from "react-native";
 import FontAwesome from "@expo/vector-icons/FontAwesome"; // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-import Colors from "@/src/constants/Colors";
-import { useColorScheme } from "@/src/components/useColorScheme";
+import Colors from "../../../constants/Colors";
+import { useColorScheme } from "../../../components/useColorScheme";
 export default function MenuList() {
   const colorScheme = useColorScheme();
   return (

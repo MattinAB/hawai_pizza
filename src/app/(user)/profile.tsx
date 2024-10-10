@@ -1,14 +1,14 @@
 import { Pressable, StyleSheet } from "react-native";
 import { Image, Button } from "react-native";
-import { Text, View } from "@/src/components/Themed";
+import { Text, View } from "../../components/Themed";
 import { MaterialCommunityIcons, FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import * as imagePicker from "expo-image-picker";
-import Colors from "@/src/constants/Colors";
-import { useAuth } from "@/src/app/provider/AuthContext";
-import LoginScreen from "@/src/app/auth/LoginScreen";
-import { supabase } from "@/src/app/lib/Subabase";
-import { Link, Redirect, useNavigation } from "expo-router";
+import Colors from "../../constants/Colors";
+import { useAuth } from "../../app/provider/AuthContext";
+import LoginScreen from "../../app/auth/LoginScreen";
+import { supabase } from "../../app/lib/Subabase";
+import { Link} from "expo-router";
 
 export default function TabTwoScreen() {
   const [imageUri, setImageUri] = React.useState("");

@@ -7,15 +7,15 @@ import {
   StyleSheet,
 } from "react-native";
 import { Stack } from "expo-router";
-import { View, Text } from "@/src/components/Themed";
+import { View, Text } from "../../../components/Themed";
 import { useLocalSearchParams } from "expo-router";
-import Colors from "@/src/constants/Colors";
-import { useCart } from "@/src/app/provider/CartContext";
-import { PizzaSize } from "@/assets/types";
+import Colors from "../../../constants/Colors";
+import { useCart } from "../../../app/provider/CartContext";
+import { PizzaSize } from "../../../../assets/types";
 import { useRouter } from "expo-router";
-import { useProductId } from "@/src/api/product";
-import RemoteImage from "@/src/components/remoteImage";
-import { defaultPizzaImage } from "@/src/components/ProductListItem";
+import { useProductId } from "../../../api/product";
+import RemoteImage from "../../../components/remoteImage";
+import { defaultPizzaImage } from "../../../components/ProductListItem";
 
 export default function ProductDetailsScreen() {
   const [selectedSize, setSelectedSize] = useState("M");

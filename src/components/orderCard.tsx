@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, StyleSheet, Pressable } from "react-native";
-import { Order, Tables } from "@/assets/types";
+import { Order, Tables } from "../../assets/types";
 import Colors from "../constants/Colors";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
@@ -15,7 +15,7 @@ export default function OrderCard({ order }: Props) {
   const segment = useSegments();
 
   return (
-    <Link href={`/${segment[0]}/orders/${order.id}`} asChild>
+    <Link href={`./${segment[0]}/orders/${order.id}`} asChild>
       <Pressable style={styles.container}>
         <View style={styles.orederContainer}>
           <Text style={styles.title}>Order# {order.id}</Text>

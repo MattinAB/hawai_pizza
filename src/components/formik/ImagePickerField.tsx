@@ -10,10 +10,10 @@ import {
 import * as imagePicker from "expo-image-picker";
 import { useFormikContext } from "formik";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Colors from "@/src/constants/Colors";
+import Colors from "@/constants/Colors";
 import * as FileSystem from "expo-file-system"; // Add this import
 import { randomUUID } from "expo-crypto";
-import { supabase } from "@/src/app/lib/Subabase";
+import { supabase } from "@/app/lib/Subabase";
 import { decode } from "base64-arraybuffer";
 
 interface Props {

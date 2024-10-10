@@ -4,11 +4,11 @@ import React, {
   createContext,
   useContext,
 } from "react";
-import { CartItem, Tables } from "@/assets/types"; // Import the CartItem type from the types folder
+import { CartItem, Tables } from "../../../assets/types"; // Import the CartItem type from the types folder
 import { randomUUID } from "expo-crypto";
-import { useInsertOrders } from "@/src/api/orders";
+import { useInsertOrders } from "@/api/orders";
 import { useRouter } from "expo-router";
-import { useInsertOrdersItems } from "@/src/api/orderItems";
+import { useInsertOrdersItems } from "@/api/orderItems";
 
 type Product = Tables<"products">;
 
